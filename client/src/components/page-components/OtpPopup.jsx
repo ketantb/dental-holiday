@@ -81,7 +81,7 @@ const OtpPopup = ({ togglePopup }) => {
   return (
     <div className="flex justify-center items-center h-[40rem]">
       <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-70">
-        <div className="bg-white rounded-lg p-6 w-[80%] lg:w-[40%]">
+        <div className="bg-white rounded-lg p-6 pt-0 w-[80%] lg:w-[40%]">
           <div className="flex justify-start items-center mt-6">
             <p>
               Have an account ?
@@ -96,7 +96,7 @@ const OtpPopup = ({ togglePopup }) => {
               </span>
             </p>
           </div>
-          <p className="text-sm">Quick signup using OTP</p>
+          <p className="text-sm mt-6">Quick signup using OTP</p>
           <input
             type="text"
             placeholder="Email"
