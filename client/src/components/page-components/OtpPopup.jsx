@@ -82,7 +82,7 @@ const OtpPopup = ({ togglePopup }) => {
     <div className="flex justify-center items-center h-[40rem]">
       <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-70">
         <div className="bg-white rounded-lg p-6 w-[80%] lg:w-[40%]">
-          <div className="flex justify-end items-center mt-6">
+          <div className="flex justify-start items-center mt-6">
             <p>
               Have an account ?
               <span
