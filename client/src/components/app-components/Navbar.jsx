@@ -1,17 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import TopDrawer from "./TopDrawer";
 import OtpPopup from "../page-components/OtpPopup";
 
-const Navbar = () => {
+const Navbar = ({ togglePopup, isOpen }) => {
+  const navigate = useNavigate();
   // responsive top drawer
   const [topDrawer, setTopDrawer] = useState(false);
-
-  const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
 
   return (
     <div className="px-6 pt-0 grid grid-cols-2 lg:grid lg:grid-cols-12   ">
@@ -19,7 +16,13 @@ const Navbar = () => {
         DENTAL HOLIDAY
       </div>
       <div className="hidden lg:col-span-9 text-md h-full lg:flex justify-end gap-2 border-2  ">
-        <button className="cursor-pointer" onClick={togglePopup}>
+        <button
+          className="cursor-pointer"
+          onClick={() => {
+            navigate("/");
+            togglePopup();
+          }}
+        >
           Login
         </button>
       </div>

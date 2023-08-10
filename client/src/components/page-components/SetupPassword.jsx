@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const SetupPassword = () => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+const SetupPassword = ({
+  password,
+  setPassword,
+  confirmPassword,
+  setConfirmPassword,
+  passwordErrorStyle,
+  passwordMatch,
+}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(password, confirmPassword);
@@ -16,12 +21,23 @@ const SetupPassword = () => {
   };
 
   return (
-    <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold mb-4">Set up password</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="w-full max-w-md p-2 mt-6 bg-white">
+      <h2 className="text-lg font-semibold ">Set up password</h2>
+      {password === "" && confirmPassword === "" ? (
+        <p className="text-red-600 opacity-80 text-sm">
+          Please setup password to proceed !
+        </p>
+      ) : null}
+      {passwordMatch ? (
+        <p className="text-red-600 text-sm  ">Passwords does not match!</p>
+      ) : null}
+      <form onSubmit={handleSubmit} className="mt-4">
         <div className="mt-2">
           <label>Enter Password</label>
-          <div className="border-2 w-full rounded py-1 mt-2">
+          <div
+            className="border-2 w-full rounded py-1 mt-2 flex"
+            style={passwordErrorStyle}
+          >
             <input
               type={showPassword ? "text" : "password"}
               className="px-2 py-1 w-[90%] outline-none  "
@@ -40,7 +56,10 @@ const SetupPassword = () => {
         </div>
         <div className="mt-6">
           <label>Confirm Password</label>
-          <div className="border-2 w-full rounded py-1 mt-2">
+          <div
+            className="border-2 w-full rounded py-1 mt-2 flex"
+            style={passwordErrorStyle}
+          >
             <input
               type={showPassword ? "text" : "password"}
               className="px-2 py-1 w-[90%]  outline-none "
@@ -56,14 +75,6 @@ const SetupPassword = () => {
               {showPassword ? <FaEye /> : <FaEyeSlash />}
             </button>
           </div>
-        </div>
-        <div className="flex justify-end mt-4">
-          <button
-            disabled={password === "" || confirmPassword === ""}
-            className="bg-green-800 text-white p-2 px-10 rounded-lg cursor-pointer disabled:cursor-not-allowed"
-          >
-            Done
-          </button>
         </div>
       </form>
     </div>
