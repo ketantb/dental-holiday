@@ -18,14 +18,14 @@ function App() {
       <Routes>
         <Route element={<Main togglePopup={togglePopup} isOpen={isOpen} />}>
           <Route path="/" element={<Home />}></Route>
-          {/* <Route
+          <Route
             path="/account-login"
             element={<Login togglePopup={togglePopup} />}
-          ></Route> */}
-          {/* <Route
+          ></Route>
+          <Route
             path="/account-details-form"
             element={<AccountDetails />}
-          ></Route> */}
+          ></Route>
         </Route>
       </Routes>
     </>

@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import TopDrawer from "./TopDrawer";
 import OtpPopup from "../page-components/OtpPopup";
+import { toast } from "react-hot-toast";
 
-const Navbar = ({ togglePopup, isOpen }) => {
+const Navbar = ({ togglePopup, isOpen, auth, setAuth }) => {
   const navigate = useNavigate();
   // responsive top drawer
   const [topDrawer, setTopDrawer] = useState(false);
+
+  // set token =>auth
+  const token = localStorage.getItem("token");
+  console.log(token);
+  useEffect(() => {
+    setAuth(token);
+  }, [token]);
 
   return (
     <div className="px-6 pt-0 grid grid-cols-2 lg:grid lg:grid-cols-12   ">
@@ -16,15 +24,27 @@ const Navbar = ({ togglePopup, isOpen }) => {
         DENTAL HOLIDAY
       </div>
       <div className="hidden lg:col-span-9 text-md h-full lg:flex justify-end gap-2 border-2  ">
-        <button
-          className="cursor-pointer"
-          onClick={() => {
-            navigate("/");
-            togglePopup();
-          }}
-        >
-          Login
-        </button>
+        {auth ? (
+          <button
+            className="cursor-pointer"
+            onClick={() => {
+              navigate("/");
+              localStorage.clear();
+              toast.success("Logged out successfully");
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="cursor-pointer"
+            onClick={() => {
+              navigate("/account-login");
+            }}
+          >
+            Login
+          </button>
+        )}
       </div>
 
       {/* responsive top drawer */}

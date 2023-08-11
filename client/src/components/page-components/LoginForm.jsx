@@ -1,17 +1,43 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "../../axios";
+import { toast } from "react-hot-toast";
 
-function LoginForm({ togglePopup }) {
+function LoginForm({ togglePopup, setAuth }) {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+  // handle inputs
+  const handleInputs = (e) => {
+    setLoginForm((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
+
+  // handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      toast.loading("Logging in...");
+      const resp = await axios.post("/account-login", loginForm);
+      console.log(resp);
+      if (resp.data.success) {
+        toast.dismiss();
+        navigate("/account-details-form");
+        toast.success(resp.data.message);
+        localStorage.setItem("token", resp.data.token);
+      } else {
+        toast.dismiss();
+        toast.error(resp.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // handle login
 
   return (
     <div className="flex items-center justify-center min-h-[40rem] bg-gray-100">
@@ -21,16 +47,18 @@ function LoginForm({ togglePopup }) {
           <label className="block mb-2">Email:</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={loginForm.email}
+            onChange={handleInputs}
             className="w-full p-2 border rounded focus:outline-none focus:border-blue-400 mb-4"
             required
           />
           <label className="block mb-2">Password:</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={loginForm.password}
+            onChange={handleInputs}
             className="w-full p-2 border rounded focus:outline-none focus:border-blue-400 mb-4"
             required
           />

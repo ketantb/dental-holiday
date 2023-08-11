@@ -6,7 +6,7 @@ const accountSchema = new mongoose.Schema({
   password: String,
   travelDetails: {},
   treatmentDetails: {},
-  isVerified: { type: String, default: false },
+  isVerified: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("account", accountSchema);

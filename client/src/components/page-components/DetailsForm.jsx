@@ -3,37 +3,37 @@ import { indianStates } from "../../data/states&cities";
 import { treatments } from "../../data/treatments";
 
 function DetailsForm() {
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  const [numTravelers, setNumTravelers] = useState("");
-  const [numPatients, setNumPatients] = useState("");
-  const [treatmentType, setTreatmentType] = useState("");
-  const [date, setDate] = useState("");
+  // const [selectedState, setSelectedState] = useState("");
+  // const [selectedCity, setSelectedCity] = useState("");
+  // const [numTravelers, setNumTravelers] = useState("");
+  // const [numPatients, setNumPatients] = useState("");
+  // const [treatmentType, setTreatmentType] = useState("");
+  // const [date, setDate] = useState("");
 
-  const handleStateChange = (stateName) => {
-    setSelectedState(stateName);
-    setSelectedCity("");
-  };
+  // const handleStateChange = (stateName) => {
+  //   setSelectedState(stateName);
+  //   setSelectedCity("");
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted:", {
-      state: selectedState,
-      city: selectedCity,
-      numTravelers,
-      numPatients,
-      treatmentType,
-      date,
-    });
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Handle form submission logic here
+  //   console.log("Form submitted:", {
+  //     state: selectedState,
+  //     city: selectedCity,
+  //     numTravelers,
+  //     numPatients,
+  //     treatmentType,
+  //     date,
+  //   });
+  // };
 
   return (
     <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">
         Travel and Treatment Information
       </h2>
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      {/* <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
           <label
             htmlFor="state"
@@ -156,7 +156,7 @@ function DetailsForm() {
             Submit
           </button>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 }

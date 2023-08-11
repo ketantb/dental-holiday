@@ -66,7 +66,7 @@ const OtpPopup = ({ togglePopup }) => {
       if (resp.data.success) {
         toast.dismiss();
         toast.success(resp.data.message);
-        navigate("/account-details-form");
+        navigate("/account-login");
         togglePopup();
       } else {
         toast.dismiss();
