@@ -34,6 +34,7 @@ const OtpPopup = ({ togglePopup }) => {
     try {
       toast.loading("Please check your email for otp...");
       const resp = await axios.post("/send-email", data);
+      console.log(resp);
       if (resp.data.success) {
         setOtpInput(true);
         toast.dismiss();

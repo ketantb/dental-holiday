@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+app.use(require("./routes/send-otp"));
 app.use(require("./routes/account"));
 
 app.get("/", (req, res) => {
