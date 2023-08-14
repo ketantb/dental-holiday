@@ -153,7 +153,7 @@ function DetailsForm() {
             <option value="">Select Treatment Type</option>
             {treatments.map((treatment, i) => {
               return (
-                <option value="surgery" key={i + 1}>
+                <option value={treatment.title} key={i + 1}>
                   {treatment.title}
                 </option>
               );
