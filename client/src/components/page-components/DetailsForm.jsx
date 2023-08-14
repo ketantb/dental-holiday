@@ -6,6 +6,7 @@ import { indianStates } from "../../data/states&cities";
 import { treatments } from "../../data/treatments";
 
 import axios from "../../axios";
+import { toast } from "react-hot-toast";
 import { getAccountDetails } from "../../store/slices/accountDetailsSlice";
 
 function DetailsForm() {
@@ -39,18 +40,19 @@ function DetailsForm() {
         treatmentDate: treatmentDate,
       },
     };
-    // try {
-    //   const resp = await axios.put("/account-form-details", data, {
-    //     headers: {
-    //       authorization: token,
-    //     },
-    //   });
-    //   console.log(resp);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    navigate("/hospitals-list");
-    dispatch(getAccountDetails(data));
+    try {
+      toast.loading("Searching for hospitals");
+      const resp = await axios.put("/account-form-details", data, {
+        headers: {
+          authorization: token,
+        },
+      });
+      toast.dismiss();
+      navigate(`/hospitals-list/${selectedCity}/${selectedState}`);
+      dispatch(getAccountDetails(data));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -186,7 +188,7 @@ function DetailsForm() {
             }
             className="w-full bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500 disabled:cursor-not-allowed"
           >
-            Next
+            Search Hospitals
           </button>
         </div>
       </form>

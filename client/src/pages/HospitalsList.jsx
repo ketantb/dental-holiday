@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const HospitalsList = () => {
+  const { city, state } = useParams();
   const navigate = useNavigate();
   const accountData = useSelector((state) => state.get_account_details);
   useEffect(() => {
@@ -11,20 +12,22 @@ const HospitalsList = () => {
     }
   }, [accountData]);
 
-  console.log("data details", accountData);
+  // if page is refreshed or account data=null redirect to form to fill details again
   if (!accountData) {
     return <div>Redirecting...</div>;
   }
+
   return (
     <div>
       <h1>
         Search hospitals in
-        <span> {accountData.travelDetails.city}</span>,
-        <span> {accountData.travelDetails.state}</span>
+        <span> {city}</span>,<span> {state}</span>
       </h1>
       <button
         className="border-2 bg-blue-300 p-3 rounded-md"
-        onClick={() => navigate("/hotels-list")}
+        onClick={() => {
+          navigate(`/hotels-list/${city}/${state}`);
+        }}
       >
         Check Hotels
       </button>

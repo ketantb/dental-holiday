@@ -28,8 +28,14 @@ function App() {
             path="/account-details-form"
             element={<AccountDetails />}
           ></Route>
-          <Route path="/hospitals-list" element={<HospitalList />}></Route>
-          <Route path="/hotels-list" element={<HotelsList />}></Route>
+          <Route
+            path="/hospitals-list/:city/:state"
+            element={<HospitalList />}
+          ></Route>
+          <Route
+            path="/hotels-list/:city/:state"
+            element={<HotelsList />}
+          ></Route>
         </Route>
       </Routes>
     </>

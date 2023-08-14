@@ -13,7 +13,6 @@ const Navbar = ({ togglePopup, isOpen, auth, setAuth }) => {
 
   // set token =>auth
   const token = localStorage.getItem("token");
-  console.log(token);
   useEffect(() => {
     setAuth(token);
   }, [token]);

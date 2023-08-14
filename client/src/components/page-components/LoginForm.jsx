@@ -22,7 +22,6 @@ function LoginForm({ togglePopup, setAuth }) {
     try {
       toast.loading("Logging in...");
       const resp = await axios.post("/account-login", loginForm);
-      console.log(resp);
       if (resp.data.success) {
         toast.dismiss();
         navigate("/account-details-form");
