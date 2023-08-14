@@ -6,6 +6,8 @@ import Main from "./layout/Main";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import AccountDetails from "./pages/AccountDetails";
+import HospitalList from "./pages/HospitalsList";
+import HotelsList from "./pages/HotelsList";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +28,8 @@ function App() {
             path="/account-details-form"
             element={<AccountDetails />}
           ></Route>
+          <Route path="/hospitals-list" element={<HospitalList />}></Route>
+          <Route path="/hotels-list" element={<HotelsList />}></Route>
         </Route>
       </Routes>
     </>

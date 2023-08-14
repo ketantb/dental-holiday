@@ -1,39 +1,64 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { indianStates } from "../../data/states&cities";
 import { treatments } from "../../data/treatments";
 
+import axios from "../../axios";
+import { getAccountDetails } from "../../store/slices/accountDetailsSlice";
+
 function DetailsForm() {
-  // const [selectedState, setSelectedState] = useState("");
-  // const [selectedCity, setSelectedCity] = useState("");
-  // const [numTravelers, setNumTravelers] = useState("");
-  // const [numPatients, setNumPatients] = useState("");
-  // const [treatmentType, setTreatmentType] = useState("");
-  // const [date, setDate] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // const handleStateChange = (stateName) => {
-  //   setSelectedState(stateName);
-  //   setSelectedCity("");
-  // };
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [numTravelers, setNumTravelers] = useState("");
+  const [numPatients, setNumPatients] = useState("");
+  const [treatmentType, setTreatmentType] = useState("");
+  const [treatmentDate, setTreatmentDate] = useState("");
+  const token = localStorage.getItem("token");
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Handle form submission logic here
-  //   console.log("Form submitted:", {
-  //     state: selectedState,
-  //     city: selectedCity,
-  //     numTravelers,
-  //     numPatients,
-  //     treatmentType,
-  //     date,
-  //   });
-  // };
+  const handleStateChange = (stateName) => {
+    setSelectedState(stateName);
+    setSelectedCity("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      travelDetails: {
+        state: selectedState,
+        city: selectedCity,
+      },
+      treatmentDetails: {
+        numTravelers: numTravelers,
+        numPatients: numPatients,
+        treatmentType: treatmentType,
+        treatmentDate: treatmentDate,
+      },
+    };
+    // try {
+    //   const resp = await axios.put("/account-form-details", data, {
+    //     headers: {
+    //       authorization: token,
+    //     },
+    //   });
+    //   console.log(resp);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    navigate("/hospitals-list");
+    dispatch(getAccountDetails(data));
+  };
 
   return (
     <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">
         Travel and Treatment Information
       </h2>
-      {/* <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
           <label
             htmlFor="state"
@@ -135,28 +160,36 @@ function DetailsForm() {
         </div>
         <div>
           <label
-            htmlFor="date"
+            htmlFor="treatmentData"
             className="block text-sm font-medium text-gray-700"
           >
             Date:
           </label>
           <input
             type="date"
-            id="date"
+            id="treatmentDate"
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            value={treatmentDate}
+            onChange={(e) => setTreatmentDate(e.target.value)}
           />
         </div>
         <div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
+            disabled={
+              selectedCity === "" ||
+              selectedState === "" ||
+              numTravelers == "" ||
+              numPatients === "" ||
+              treatmentType === "" ||
+              treatmentDate === ""
+            }
+            className="w-full bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500 disabled:cursor-not-allowed"
           >
-            Submit
+            Next
           </button>
         </div>
-      </form> */}
+      </form>
     </div>
   );
 }

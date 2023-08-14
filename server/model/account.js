@@ -4,8 +4,16 @@ const accountSchema = new mongoose.Schema({
   email: String,
   otp: Number,
   password: String,
-  travelDetails: {},
-  treatmentDetails: {},
+  travelDetails: {
+    state: String,
+    city: String,
+  },
+  treatmentDetails: {
+    numTravelers: Number,
+    numPatients: Number,
+    treatmentType: String,
+    treatmentDate: String,
+  },
   isVerified: { type: Boolean, default: false },
 });
 

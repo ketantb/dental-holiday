@@ -31,7 +31,7 @@ const TopDrawer = ({ topDrawer, setTopDrawer, togglePopup }) => {
         <li
           className="leading-[3rem] border-b-[1px]  text-sm capitalize hover:text-green-600"
           onClick={() => {
-            togglePopup();
+            navigate("/account-login");
             setTopDrawer(false);
           }}
         >

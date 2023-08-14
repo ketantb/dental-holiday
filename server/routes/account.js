@@ -3,7 +3,9 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Account = require("../model/account");
+const moment = require("moment");
+Account = require("../model/account");
+const accountMiddleware = require("../midleware/account");
 
 //verify otp
 router.post("/verify-otp", async (req, resp) => {
@@ -69,10 +71,26 @@ router.post("/account-login", async (req, resp) => {
 });
 
 // add details e.g travel , treatment , date details
-router.put("/account-form-details", async (req, resp) => {
-  console.log(req.body);
+router.put("/account-form-details", accountMiddleware, async (req, resp) => {
+  const accountId = req.accountId;
+  const modifiedTreatmentDate = moment(
+    req.body.treatmentDetails.treatmentDate
+  ).format("DD/MM/YYYY");
   try {
-    const findAccount = await Account.findOne({ email: req.body.email });
+    const findAccount = await Account.findOne({ _id: accountId });
+    if (findAccount) {
+      const updateData = await Account.findByIdAndUpdate(accountId, {
+        travelDetails: req.body.travelDetails,
+        treatmentDetails: modifiedTreatmentDate,
+      });
+    }
+    const updatedAccount = await Account.findOne({ _id: accountId });
+    console.log(updatedAccount);
+    resp.json({
+      success: false,
+      message: "Details saved successfully",
+      updatedAccount,
+    });
   } catch (err) {
     resp.json({ success: false, message: err.message });
   }
