@@ -81,7 +81,7 @@ router.put("/account-form-details", accountMiddleware, async (req, resp) => {
     if (findAccount) {
       const updateData = await Account.findByIdAndUpdate(accountId, {
         travelDetails: req.body.travelDetails,
-        treatmentDetails: modifiedTreatmentDate,
+        treatmentDetails: req.body.treatmentDetails,
       });
     }
     const updatedAccount = await Account.findOne({ _id: accountId });

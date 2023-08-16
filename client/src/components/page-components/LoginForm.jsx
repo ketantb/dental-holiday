@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "../../axios";
 import { toast } from "react-hot-toast";
 
-function LoginForm({ togglePopup, setAuth }) {
+function LoginForm({ toggleForms, setAuth }) {
   const navigate = useNavigate();
 
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -73,8 +73,7 @@ function LoginForm({ togglePopup, setAuth }) {
           <span
             className="text-blue-500 cursor-pointer ml-2"
             onClick={() => {
-              navigate("/");
-              togglePopup();
+              toggleForms();
             }}
           >
             SignUp

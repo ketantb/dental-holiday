@@ -28,6 +28,7 @@ function DetailsForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = {
       travelDetails: {
         state: selectedState,

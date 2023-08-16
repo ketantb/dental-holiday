@@ -11,18 +11,18 @@ import HotelsList from "./pages/HotelsList";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => {
+  const toggleForms = () => {
     setIsOpen(!isOpen);
   };
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
-        <Route element={<Main togglePopup={togglePopup} isOpen={isOpen} />}>
+        <Route element={<Main toggleForms={toggleForms} isOpen={isOpen} />}>
           <Route path="/" element={<Home />}></Route>
           <Route
             path="/account-login"
-            element={<Login togglePopup={togglePopup} />}
+            element={<Login toggleForms={toggleForms} />}
           ></Route>
           <Route
             path="/account-details-form"
