@@ -71,23 +71,19 @@ router.post("/account-login", async (req, resp) => {
 });
 
 // add details e.g travel , treatment , date details
-router.put("/account-form-details", accountMiddleware, async (req, resp) => {
+router.post("/account-form-details", accountMiddleware, async (req, resp) => {
   const accountId = req.accountId;
-  const modifiedTreatmentDate = moment(
-    req.body.treatmentDetails.treatmentDate
-  ).format("DD/MM/YYYY");
+  console.log(accountId);
   try {
     const findAccount = await Account.findOne({ _id: accountId });
     if (findAccount) {
-      const updateData = await Account.findByIdAndUpdate(accountId, {
-        travelDetails: req.body.travelDetails,
-        treatmentDetails: req.body.treatmentDetails,
-      });
+      findAccount.travelTreatmentDetails.push(req.body);
+      await findAccount.save();
     }
     const updatedAccount = await Account.findOne({ _id: accountId });
-    console.log(updatedAccount);
+    console.log(updatedAccount.travelTreatmentDetails.length);
     resp.json({
-      success: false,
+      success: true,
       message: "Details saved successfully",
       updatedAccount,
     });

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const accountDetailsSlice = createSlice({
-  name: "get_account_details",
+  name: "account_details",
   initialState: null,
   reducers: {
     getAccountDetails(state, action) {

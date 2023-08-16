@@ -5,14 +5,18 @@ import { useNavigate, useParams } from "react-router-dom";
 const HospitalsList = () => {
   const { city, state } = useParams();
   const navigate = useNavigate();
-  const accountData = useSelector((state) => state.get_account_details);
+  const accountData = useSelector((state) => state.account_details);
   useEffect(() => {
     if (!accountData) {
       navigate("/account-details-form");
     }
   }, [accountData]);
 
-  // if page is refreshed or account data=null redirect to form to fill details again
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
+  // if page is refreshed or account data is null redirect to the form to fill details again
   if (!accountData) {
     return <div>Redirecting...</div>;
   }

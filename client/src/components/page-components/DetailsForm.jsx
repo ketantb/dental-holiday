@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -43,11 +43,11 @@ function DetailsForm() {
     };
     try {
       toast.loading("Searching for hospitals");
-      const resp = await axios.put("/account-form-details", data, {
-        headers: {
-          authorization: token,
-        },
-      });
+      // const resp = await axios.post("/account-form-details", data, {
+      //   headers: {
+      //     authorization: token,
+      //   },
+      // });
       toast.dismiss();
       navigate(`/hospitals-list/${selectedCity}/${selectedState}`);
       dispatch(getAccountDetails(data));
@@ -55,6 +55,9 @@ function DetailsForm() {
       console.log(err);
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   return (
     <div className="w-full p-10 flex justify-center items-center">

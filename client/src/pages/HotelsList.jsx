@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const HospitalsList = () => {
   const navigate = useNavigate();
-  const accountData = useSelector((state) => state.get_account_details);
+  const accountData = useSelector((state) => state.account_details);
   console.log("data details", accountData);
 
   useEffect(() => {
@@ -12,6 +12,10 @@ const HospitalsList = () => {
       navigate("/account-details-form");
     }
   }, [accountData]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   if (!accountData) {
     return <div>Redirecting...</div>;
