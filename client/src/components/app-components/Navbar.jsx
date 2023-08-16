@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import TopDrawer from "./TopDrawer";
-import OtpPopup from "../page-components/OtpPopup";
 import { toast } from "react-hot-toast";
 
 const Navbar = ({ togglePopup, isOpen, auth, setAuth }) => {
@@ -38,7 +37,7 @@ const Navbar = ({ togglePopup, isOpen, auth, setAuth }) => {
           <button
             className="cursor-pointer"
             onClick={() => {
-              navigate("/account-login");
+              navigate("/account");
             }}
           >
             Login
@@ -62,16 +61,9 @@ const Navbar = ({ togglePopup, isOpen, auth, setAuth }) => {
       </div>
       {topDrawer ? (
         <div>
-          <TopDrawer
-            topDrawer={topDrawer}
-            setTopDrawer={setTopDrawer}
-            togglePopup={togglePopup}
-          />
+          <TopDrawer topDrawer={topDrawer} setTopDrawer={setTopDrawer} />
         </div>
       ) : null}
-
-      {/* otp popup */}
-      {isOpen && <OtpPopup togglePopup={togglePopup} />}
     </div>
   );
 };

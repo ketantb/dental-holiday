@@ -31,11 +31,11 @@ const TopDrawer = ({ topDrawer, setTopDrawer, togglePopup }) => {
         <li
           className="leading-[3rem] border-b-[1px]  text-sm capitalize hover:text-green-600"
           onClick={() => {
-            navigate("/account-login");
+            navigate("/account");
             setTopDrawer(false);
           }}
         >
-          Login-Signup
+          Login
         </li>
       </ul>
     </div>
