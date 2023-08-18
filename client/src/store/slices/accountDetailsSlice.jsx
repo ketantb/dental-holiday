@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const accountDetailsSlice = createSlice({
   name: "account_details",
-  initialState: null,
+  initialState: [],
   reducers: {
     getAccountDetails(state, action) {
-      return action.payload;
+      state.push(action.payload);
     },
   },
 });

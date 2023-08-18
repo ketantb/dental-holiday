@@ -14,7 +14,7 @@ const Main = ({ toggleForms, isOpen }) => {
         auth={auth}
         setAuth={setAuth}
       />
-      <div className="bg-[#FDEEF4] " style={{ backgroundColor: "#fdf1f6" }}>
+      <div style={{ backgroundColor: "#fdf1f6" }}>
         <Outlet />
       </div>
       <Footer />

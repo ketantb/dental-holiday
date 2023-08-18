@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import AccountDetails from "./pages/AccountDetails";
 import HospitalList from "./pages/HospitalsList";
 import HotelsList from "./pages/HotelsList";
+import Activity from "./pages/Activity";
+import ConfirmPackageDetails from "./pages/ConfirmPackageDetails";
 
 function App() {
   return (
@@ -27,6 +29,11 @@ function App() {
           <Route
             path="/hotels-list/:city/:state"
             element={<HotelsList />}
+          ></Route>
+          <Route path="/select-activity" element={<Activity />}></Route>
+          <Route
+            path="/final-confirmation"
+            element={<ConfirmPackageDetails />}
           ></Route>
         </Route>
       </Routes>

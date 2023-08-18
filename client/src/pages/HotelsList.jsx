@@ -1,32 +1,36 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import HotelCard from "../components/page-components/HotelCard";
 
-const HospitalsList = () => {
+const HotelsList = () => {
   const navigate = useNavigate();
-  const accountData = useSelector((state) => state.account_details);
-  console.log("data details", accountData);
+  // const accountData = useSelector((state) => state.account_details);
+  // console.log("data details", accountData);
 
-  useEffect(() => {
-    if (!accountData) {
-      navigate("/account-details-form");
-    }
-  }, [accountData]);
+  // useEffect(() => {
+  //   if (!accountData) {
+  //     navigate("/account-details-form");
+  //   }
+  // }, [accountData]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   });
 
-  if (!accountData) {
-    return <div>Redirecting...</div>;
-  }
+  // if (!accountData) {
+  //   return <div>Redirecting...</div>;
+  // }
   return (
     <div>
       <h1>
         Search hotels to stay in
-        <span> {accountData.travelDetails.city}</span>,
-        <span> {accountData.travelDetails.state}</span>
+        {/* <span> {accountData.travelDetails.city}</span>,
+        <span> {accountData.travelDetails.state}</span> */}
       </h1>
+      <div>
+        <HotelCard />
+      </div>
       <button
         className="border-2 bg-blue-300 p-3 rounded-md"
         onClick={() => navigate("/select-activity")}
@@ -37,4 +41,4 @@ const HospitalsList = () => {
   );
 };
 
-export default HospitalsList;
+export default HotelsList;

@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
-import TopDrawer from "./TopDrawer";
+import { ImMobile } from "react-icons/im";
 import { toast } from "react-hot-toast";
+import { navbarMenu } from "../../data/navbar";
+
+import TopDrawer from "./TopDrawer";
 
 const Navbar = ({ togglePopup, isOpen, auth, setAuth }) => {
   const navigate = useNavigate();
@@ -18,13 +21,34 @@ const Navbar = ({ togglePopup, isOpen, auth, setAuth }) => {
 
   return (
     <div className="px-6 pt-0 grid grid-cols-2 lg:grid lg:grid-cols-12   ">
-      <div className="lg:col-span-3 lg:border-r-2  lg:flex lg:justify-center lg:text-xl lg:px-3 py-4">
-        DENTAL HOLIDAY
+      <div className="lg:col-span-9 lg:flex gap-[3rem] lg:text-xl lg:px-3 py-4 ">
+        <h1>DENTAL HOLIDAY</h1>
+        <div className="hidden lg:flex gap-10 text-sm  px-1 ">
+          {navbarMenu.map((menu, i) => {
+            return (
+              <button
+                key={i + 1}
+                onClick={() => {
+                  navigate(`${menu.pageLink}`);
+                }}
+              >
+                {menu.title === "Contact" ? null : menu.title}
+              </button>
+            );
+          })}
+        </div>
       </div>
-      <div className="hidden lg:col-span-9 text-md h-full lg:flex justify-end gap-2 border-2  ">
+      <div className="hidden lg:col-span-3 text-md h-full lg:flex justify-center gap-10 items-center  ">
+        <div className="flex">
+          <ImMobile className="text-3xl  mt-1 text-gray-500" />
+          <p className="flex flex-col text-sm  ml-2">
+            <span>CONTACT</span>
+            <span>+789456123</span>
+          </p>
+        </div>
         {auth ? (
           <button
-            className="cursor-pointer"
+            className="cursor-pointer border-[1px] border-blue-400 text-blue-400 w-[5rem] h-[3rem] rounded-md"
             onClick={() => {
               navigate("/");
               localStorage.clear();
@@ -35,7 +59,7 @@ const Navbar = ({ togglePopup, isOpen, auth, setAuth }) => {
           </button>
         ) : (
           <button
-            className="cursor-pointer"
+            className="cursor-pointer border-[1px] border-blue-400 text-blue-400 w-[7rem] h-[2.5rem] rounded-md"
             onClick={() => {
               navigate("/account");
             }}
