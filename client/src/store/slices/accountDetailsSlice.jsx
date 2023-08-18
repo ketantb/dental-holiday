@@ -7,9 +7,16 @@ const accountDetailsSlice = createSlice({
     getAccountDetails(state, action) {
       state.push(action.payload);
     },
+    addHospital(state, action) {
+      state.push(action.payload);
+    },
+    addHotel(state, action) {
+      state.push(action.payload);
+    },
   },
 });
 
 export default accountDetailsSlice.reducer;
 // export default userSlice.reducer;
-export const { getAccountDetails } = accountDetailsSlice.actions;
+export const { getAccountDetails, addHospital, addHotel } =
+  accountDetailsSlice.actions;

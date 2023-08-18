@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaTimes } from "react-icons/fa"; // Import the FaTimes icon from FaIcons set
 
 import { doctors } from "../data/doctors";
-
+import { addHospital } from "../store/slices/accountDetailsSlice";
 import HospitalDoctorCard from "../components/page-components/HospitalDoctorCard";
 
 const HospitalsList = () => {
   const { city, state } = useParams();
   const navigate = useNavigate();
-  // const accountData = useSelector((state) => state.account_details);
-  // console.log("accountData", accountData);
+  const accountData = useSelector((state) => state.account_details);
+  console.log("accountData", accountData);
+
   // useEffect(() => {
   //   if (!accountData.length) {
   //     navigate("/account-details-form");
@@ -27,16 +28,25 @@ const HospitalsList = () => {
   const [hospital, setHospital] = useState({});
 
   // handle proceed
-  const handleProceed = () => {};
+  const dispatch = useDispatch();
+  const handleProceed = () => {
+    const hospitalData = {
+      hospital: hospital,
+    };
+    dispatch(addHospital(hospitalData));
+    navigate(`/hotels-list/${city}/${state}`);
+  };
+
   // if page is refreshed or account data is null redirect to the form to fill details again
   // if (!accountData) {
   //   return <div>Redirecting...</div>;
   // }
-  console.log(hospital);
+  console.log("hospital", hospital);
+
   return (
     <div className="p-4">
       {oppoitmentClick && (
-        <div className="fixed bottom-10 right-10 bg-white border-[1px] border-blue-900  shadow-2xl rounded-sm w-[20rem] h-[10rem] p-3 text-black pb-3">
+        <div className="fixed bottom-10 right-10 bg-white border-[1px] border-blue-900  shadow-2xl rounded-sm w-[20rem] p-3 text-black pb-3">
           <p className="flex justify-between border-b-[0.5px] pb-2">
             <span>Your Hospital</span>
             <FaTimes
@@ -83,14 +93,6 @@ const HospitalsList = () => {
           );
         })}
       </div>
-      {/* <button
-        className="border-2 bg-blue-300 p-3 rounded-md"
-        onClick={() => {
-          navigate(`/hotels-list/${city}/${state}`);
-        }}
-      >
-        Check Hotels
-      </button> */}
     </div>
   );
 };

@@ -5,11 +5,11 @@ const HospitalDoctorCard = ({
   index,
   data,
   doctors,
-  oppoitmentClick,
   setOppoitmentClick,
   setHospital,
 }) => {
   const handleBookAppoitment = (index) => {
+    console.log(index);
     doctors.find((data, i) => {
       if (index === i) {
         setHospital(data);

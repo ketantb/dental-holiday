@@ -1,32 +1,52 @@
 import { MdLocationPin } from "react-icons/md";
 
-const HotelCard = () => {
+const HotelCard = ({
+  index,
+  data,
+  hotels,
+  hotel,
+  setHotel,
+  setBookNowClick,
+}) => {
+  const handleProceed = () => {
+    hotels.find((data, i) => {
+      if (index === i) {
+        console.log(data, i, index);
+        setHotel(data);
+        setBookNowClick(true);
+      }
+    });
+  };
+
   return (
-    <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
       <img
-        class="w-full h-48 object-cover"
-        src="https://media.istockphoto.com/id/627892060/photo/hotel-room-suite-with-view.jpg?s=612x612&w=0&k=20&c=YBwxnGH3MkOLLpBKCvWAD8F__T-ypznRUJ_N13Zb1cU="
-        alt="Hotel Image"
+        className="w-full h-48 object-cover"
+        src={data.image}
+        alt="loading..."
       />
-      <div class="px-2 py-4">
-        <div class="font-bold text-xl mb-2">Lusruco Hotel</div>
-        <p class="text-gray-700 text-base flex">
+      <div className="px-2 py-4">
+        <div className="font-bold text-xl mb-2">{data.name}</div>
+        <p className="text-gray-700 text-base flex">
           <MdLocationPin className="mt-1 text-gray-500 mr-2" />
-          <span> 123 Main Street, City</span>
+          <span> {data.address}</span>
         </p>
-        <div class="mt-4 flex justify-between ">
+        <div className="mt-4 flex justify-between ">
           <div>
-            <label class="block text-sm font-medium text-gray-400">
+            <label className="block text-sm font-medium text-gray-400">
               Book Rooms
             </label>
-            <select class="mt-1 block  py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <select className="mt-1 block  py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <option>1</option>
               <option>2</option>
               <option>3</option>
             </select>
           </div>
           <div className="flex justify-end items-end">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+            <button
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+              onClick={() => handleProceed(index)}
+            >
               Book Now
             </button>
           </div>
