@@ -5,10 +5,10 @@ import Main from "./layout/Main";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import AccountDetails from "./pages/AccountDetails";
-// import HospitalList from "./pages/HospitalsList";
-// import HotelsList from "./pages/HotelsList";
-// import Activity from "./pages/Activity";
-// import ConfirmPackageDetails from "./pages/ConfirmPackageDetails";
+import HospitalList from "./pages/HospitalsList";
+import HotelsList from "./pages/HotelsList";
+import Activity from "./pages/Activity";
+import ConfirmPackageDetails from "./pages/ConfirmPackageDetails";
 
 function App() {
   return (
