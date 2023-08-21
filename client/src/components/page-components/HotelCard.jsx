@@ -1,17 +1,9 @@
 import { MdLocationPin } from "react-icons/md";
 
-const HotelCard = ({
-  index,
-  data,
-  hotels,
-  hotel,
-  setHotel,
-  setBookNowClick,
-}) => {
+const HotelCard = ({ index, data, hotels, setHotel, setBookNowClick }) => {
   const handleProceed = () => {
     hotels.find((data, i) => {
       if (index === i) {
-        console.log(data, i, index);
         setHotel(data);
         setBookNowClick(true);
       }

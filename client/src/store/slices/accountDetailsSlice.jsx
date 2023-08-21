@@ -13,10 +13,13 @@ const accountDetailsSlice = createSlice({
     addHotel(state, action) {
       state.push(action.payload);
     },
+    addActivity(state, action) {
+      state.push(action.payload);
+    },
   },
 });
 
 export default accountDetailsSlice.reducer;
 // export default userSlice.reducer;
-export const { getAccountDetails, addHospital, addHotel } =
+export const { getAccountDetails, addHospital, addHotel, addActivity } =
   accountDetailsSlice.actions;

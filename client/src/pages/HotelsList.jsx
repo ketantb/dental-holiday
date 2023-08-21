@@ -11,13 +11,13 @@ const HotelsList = () => {
   const { city, state } = useParams();
   const navigate = useNavigate();
   const accountData = useSelector((state) => state.account_details);
-  console.log("accountData", accountData);
+  console.log("package details", accountData);
 
-  // useEffect(() => {
-  //   if (!accountData.length) {
-  //     navigate("/account-details-form");
-  //   }
-  // }, [accountData]);
+  useEffect(() => {
+    if (!accountData.length) {
+      navigate("/account-details-form");
+    }
+  }, [accountData]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,20 +30,27 @@ const HotelsList = () => {
   // handle proceed
   const dispatch = useDispatch();
   const handleProceed = () => {
+    // const hasHospital = accountData.some((item) =>
+    //   item.hasOwnProperty("hospital")
+    // );
+
     const hotelData = {
       hotel: hotel,
     };
     dispatch(addHotel(hotelData));
-    navigate(`/hotels-list/${city}/${state}`);
+    navigate(`/select-activity/${city}/${state}`);
   };
 
   // if page is refreshed or account data is null redirect to the form to fill details again
-  // if (!accountData) {
-  //   return <div>Redirecting...</div>;
-  // }
+  if (!accountData.length) {
+    return <div>Redirecting...</div>;
+  }
 
   return (
     <div className="p-4">
+      <p className="text-gray-400 text-sm">
+        Do not refresh page or do not go back
+      </p>
       {bookNowClick && (
         <div className="fixed bottom-10 right-10 bg-white border-[1px] border-blue-900  shadow-2xl rounded-sm w-[20rem] h-auto p-3 text-black pb-3">
           <p className="flex justify-between border-b-[0.5px] pb-2">
@@ -74,7 +81,7 @@ const HotelsList = () => {
         </div>
       )}
 
-      <h1>
+      <h1 className="mt-2 text-lg">
         Search hotels in
         <span> {city}</span>,<span> {state}</span>
       </h1>

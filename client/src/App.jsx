@@ -30,9 +30,12 @@ function App() {
             path="/hotels-list/:city/:state"
             element={<HotelsList />}
           ></Route>
-          <Route path="/select-activity" element={<Activity />}></Route>
           <Route
-            path="/final-confirmation"
+            path="/select-activity/:city/:state"
+            element={<Activity />}
+          ></Route>
+          <Route
+            path="/package-details"
             element={<ConfirmPackageDetails />}
           ></Route>
         </Route>

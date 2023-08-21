@@ -14,16 +14,18 @@ function DetailsForm() {
   const dispatch = useDispatch();
 
   const [selectedState, setSelectedState] = useState("");
+  const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [numTravelers, setNumTravelers] = useState("");
   const [numPatients, setNumPatients] = useState("");
   const [treatmentType, setTreatmentType] = useState("");
   const [treatmentDate, setTreatmentDate] = useState("");
-  const token = localStorage.getItem("token");
 
   const handleStateChange = (stateName) => {
     setSelectedState(stateName);
     setSelectedCity("");
+    const stateData = indianStates.find((state) => state.name === stateName);
+    setCities(stateData?.cities);
   };
 
   const handleSubmit = async (e) => {
@@ -43,14 +45,9 @@ function DetailsForm() {
     };
     try {
       toast.loading("Searching for hospitals");
-      // const resp = await axios.post("/account-form-details", data, {
-      //   headers: {
-      //     authorization: token,
-      //   },
-      // });
-      toast.dismiss();
       navigate(`/hospitals-list/${selectedCity}/${selectedState}`);
       dispatch(getAccountDetails(data));
+      toast.dismiss();
     } catch (err) {
       console.log(err);
     }
@@ -103,13 +100,11 @@ function DetailsForm() {
             >
               <option value="">Select City</option>
               {selectedState &&
-                indianStates
-                  .find((state) => state.name === selectedState)
-                  ?.cities.map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
+                cities.map((city, i) => (
+                  <option key={i} value={city.name}>
+                    {city.name}
+                  </option>
+                ))}
             </select>
           </div>
           <div>

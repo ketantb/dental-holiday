@@ -4,7 +4,7 @@ const accountSchema = new mongoose.Schema({
   email: String,
   otp: Number,
   password: String,
-  travelTreatmentDetails: [],
+  appoitmentDetails: [],
   isVerified: { type: Boolean, default: false },
 });
 
